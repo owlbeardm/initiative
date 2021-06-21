@@ -1,1 +1,69 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '~@angular/material/_theming' as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+
+$owl-palette: (
+ 50: #f8f3e8,
+ 100: #efdfc3,
+ 200: #e6cc9f,
+ 300: #ddb87e,
+ 400: #d7aa6b,
+ 500: #cf9e62,
+ 600: #CA945C,
+ 700: #c28956,
+ 800: #b87d51,
+ 900: #a66d4d,
+ contrast: (
+   50: rgba(white, 0.87),
+   100: rgba(white, 0.87),
+   200: rgba(white, 0.87),
+   300: white,
+   400: white,
+   500: white,
+   600: white,
+   700: white,
+   800: white,
+   900: white,
+ )
+);
+// #ca5e5c
+$pf2-initiative-primary: mat-palette($owl-palette);
+$pf2-initiative-accent: mat-palette($owl-palette, A200, A100, A400);
+
+
+
+// The warn palette is optional (defaults to red).
+$pf2-initiative-warn: mat-palette($mat-red);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$primary: mat-palette($mat-indigo);
+$accent:  mat-palette($mat-pink, A200, A100, A400);
+$theme: mat-dark-theme((
+  color: (
+    primary: $pf2-initiative-primary,
+    accent: $pf2-initiative-accent,
+    warn: $pf2-initiative-warn,
+  )
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes(theme);
+
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
