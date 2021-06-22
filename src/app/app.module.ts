@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PCComponent } from './components/pc/pc.component';
+import { ConditionComponent } from './components/condition/condition.component';
 import { AddFromComponent } from './components/add-from/add-from.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -18,6 +19,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
   declarations: [
     AddFromComponent,
     AppComponent,
+    ConditionComponent,
     FooterComponent,
     HeaderComponent,
     PCComponent,

@@ -15,7 +15,8 @@ export class AddFromComponent implements OnInit {
   constructor(private formBuilder: FormBuilder) {
     this.addPcForm = this.formBuilder.group({
       name: "",
-      hp: undefined
+      hp: undefined,
+      initiative: undefined
     });
   }
 

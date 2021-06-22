@@ -1,6 +1,7 @@
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { PC } from './pc';
+import { Condition } from '../condition/condition';
 
 @Component({
   selector: 'pc',
@@ -10,14 +11,23 @@ import { PC } from './pc';
 export class PCComponent implements OnInit {
 
   @ViewChild('minusHpId') minusHpId: any;
+  @ViewChild('addConditionName') addConditionName: any;
+  @Output() onDelete: EventEmitter<any> = new EventEmitter();
   @Input() pc!: PC;
   hpForm: FormGroup;
+  conditionForm: FormGroup;
   editHp = false;
+  editCondition = false;
 
 
   constructor(private formBuilder: FormBuilder) {
     this.hpForm = this.formBuilder.group({
       hp: undefined
+    });
+    this.conditionForm = this.formBuilder.group({
+      name: undefined,
+      count: undefined,
+      descending: false
     });
   }
 
@@ -38,6 +48,23 @@ export class PCComponent implements OnInit {
     this.editHp = false;
   }
 
+  addCondition(value: Condition) {
+    this.pc.conditions.push(value);
+    this.editCondition = false;
+  }
+
+  setEditCondition(){
+    this.editCondition = true;
+    this.conditionForm = this.formBuilder.group({
+      name: undefined,
+      count: undefined,
+      descending: false
+    });
+    setTimeout(() => { // this will make the execution after the above boolean has changed
+      this.addConditionName ?.nativeElement.focus();
+    }, 0);
+  }
+
   setEditHp() {
     if (this.editHp) {
       this.editHp = false;
@@ -46,10 +73,9 @@ export class PCComponent implements OnInit {
       });
     } else {
       this.editHp = true;
-      console.log(this.minusHpId ?.nativeElement.focus);
-      setTimeout(()=>{ // this will make the execution after the above boolean has changed
+      setTimeout(() => { // this will make the execution after the above boolean has changed
         this.minusHpId ?.nativeElement.focus();
-      },0);
+      }, 0);
     }
   }
 

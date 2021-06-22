@@ -26,8 +26,8 @@
         <div class="card-body">
           <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
 
-            <div class="" *ngFor="let item of items" cdkDrag>
-              <pc [pc]="item"></pc>
+            <div class="" *ngFor="let item of items; let i = index" cdkDrag>
+              <pc [pc]="item" (onDelete)="items.splice(i, 1)"></pc>
             </div>
           </div>
         </div>

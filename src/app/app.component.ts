@@ -12,13 +12,13 @@ import { PC } from './components/pc/pc';
 export class AppComponent {
   items: PC[] = [
     {
-      name: 'PC 1', hp: 22, reaction: true, isTurn: false, initiative: 12
+      name: 'PC 1', hp: 22, reaction: true, isTurn: false, initiative: 12, conditions: []
     },
     {
-      name: 'PC 1', hp: 22, reaction: true, isTurn: false, initiative: 24
+      name: 'PC 1', hp: 22, reaction: true, isTurn: false, initiative: 24, conditions: []
     },
     {
-      name: 'PC 3', reaction: false, isTurn: false
+      name: 'PC 3', reaction: false, isTurn: false, conditions: []
     }
   ];
   round = 0;
@@ -50,8 +50,22 @@ export class AppComponent {
         this.round++;
       }
       this.items.forEach(pc => pc.isTurn = false)
+      this.endPcTurn(this.items[index]);
       this.startPcTurn(this.items[newIndex]);
     }
+  }
+
+  endPcTurn(pc: PC) {
+    console.log("endPcTurn", pc);
+    pc.conditions.forEach((condition) => {
+      if (condition.count && condition.descending != undefined) {
+        console.log("condition", condition);
+        if (condition.descending)
+          condition.count--;
+        else
+          condition.count++;
+      }
+    });
   }
 
   startPcTurn(pc: PC) {
@@ -71,7 +85,9 @@ export class AppComponent {
       reaction: true,
       name: newItem.name,
       hp: newItem.hp,
-      isTurn: false
+      initiative: newItem.initiative,
+      isTurn: false,
+      conditions: []
     }
     this.items.push(pc);
   }
