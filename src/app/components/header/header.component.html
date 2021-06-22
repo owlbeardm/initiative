@@ -1,0 +1,20 @@
+<nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+  <div class="container-fluid">
+    <div class="navbar-wrapper" style="width: 100%;">
+      <a ui-sref="main"><img src="../../../../assets/logo.png" style="width: 72px;" class="img-fluid float-left" alt="Responsive image"></a>
+      <div class="ml-4 container">
+        <div class="row">
+          <h3 class="text-light mt-1 mb-1">
+            <span>{{title}}</span>
+          </h3>
+        </div>
+        <div class="row">
+          <h6 class="text-primary" ng-if="$ctrl.subtitle">
+            <span>{{subtitle}}</span>
+          </h6>
+        </div>
+      </div>
+      <!-- <sidebar-toggle></sidebar-toggle> -->
+    </div>
+  </div>
+</nav>

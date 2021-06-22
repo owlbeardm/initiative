@@ -1,0 +1,14 @@
+<form [formGroup]="addPcForm" (ngSubmit)="submit(addPcForm.value)">
+  <div class="row mt-4">
+    <div class="form-group col-md-4">
+      <input type="text" id="pcName" class="form-control" formControlName="name" placeholder="Name" required>
+    </div>
+    <div class="form-group col-md-2">
+      <input type="number" id="pcHp" class="form-control" formControlName="hp" placeholder="HP">
+    </div>
+  </div>
+  <div class="form-group">
+    <button type="submit" class="btn btn-primary" [disabled]="addPcForm.invalid">Add</button>
+    <!-- <button type="button" class="btn btn-danger" (click)="clear()">Clear All</button> -->
+  </div>
+</form>

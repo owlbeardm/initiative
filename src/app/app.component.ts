@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { AddPC } from './components/add-from/add-pc';
+import { PC } from './components/pc/pc';
 
 
 @Component({
@@ -8,21 +10,42 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  movies = [
-    'Episode I - The Phantom Menace',
-    'Episode II - Attack of the Clones',
-    'Episode III - Revenge of the Sith',
-    'Episode IV - A New Hope',
-    'Episode V - The Empire Strikes Back',
-    'Episode VI - Return of the Jedi',
-    'Episode VII - The Force Awakens',
-    'Episode VIII - The Last Jedi',
-    'Episode IX – The Rise of Skywalker'
+  items: PC[] = [
+    {
+      name: 'asd', hp: 22, reaction: true, isTurn: false
+    },
+    {
+      name: 'asd2', reaction: false, isTurn: false
+    }
   ];
+  round = 0;
 
   drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.movies, event.previousIndex, event.currentIndex);
+    moveItemInArray(this.items, event.previousIndex, event.currentIndex);
   }
 
-  title = 'pf2-initiative';
+  start() {
+    this.round = 1;
+    this.items = this.items.sort(this.pcComparator)
+    this.items.forEach(pc => pc.isTurn = false)
+    if (this.items.length) {
+      this.items[0].isTurn = true;
+    }
+  }
+
+  pcComparator(a: PC, b: PC): number {
+    if (!b.initiative) return 1;
+    if (!a.initiative) return -1;
+    return b.initiative - a.initiative;
+  }
+
+  addItem(newItem: AddPC) {
+    let pc: PC = {
+      reaction: true,
+      name: newItem.name,
+      hp: newItem.hp,
+      isTurn: false
+    }
+    this.items.push(pc);
+  }
 }
