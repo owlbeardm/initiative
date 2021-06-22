@@ -9,11 +9,14 @@
           <div class="row">
             <div class="col-auto">
               <div class="btn-group flow-right" role="group">
-                <button type="button" class="btn btn-outline-secondary btn-sm" (click)="start()">
+                <button type="button" class="btn btn-danger" (click)="clearAll()">
+                  Clear All
+                </button>
+                <button type="button" class="btn btn-success" (click)="start()">
                   Sort and Start
                 </button>
-                <button type="button" class="btn btn-outline-primary btn-sm" ng-click="$ctrl.nextCount()">
-                  Next
+                <button type="button" class="btn btn-primary" (click)="next()">
+                  Next turn
                 </button>
               </div>
               <span class="ml-3">Round <span>{{round}}</span></span>

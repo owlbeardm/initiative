@@ -12,13 +12,21 @@ import { PC } from './components/pc/pc';
 export class AppComponent {
   items: PC[] = [
     {
-      name: 'asd', hp: 22, reaction: true, isTurn: false
+      name: 'PC 1', hp: 22, reaction: true, isTurn: false, initiative: 12
     },
     {
-      name: 'asd2', reaction: false, isTurn: false
+      name: 'PC 1', hp: 22, reaction: true, isTurn: false, initiative: 24
+    },
+    {
+      name: 'PC 3', reaction: false, isTurn: false
     }
   ];
   round = 0;
+
+  clearAll() {
+    this.round = 0;
+    this.items = [];
+  }
 
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.items, event.previousIndex, event.currentIndex);
@@ -33,9 +41,28 @@ export class AppComponent {
     }
   }
 
+  next() {
+    const index = this.items.findIndex(pc => pc.isTurn);
+    if (this.items.findIndex(pc => pc.isTurn) >= 0) {
+      let newIndex = index + 1;
+      if (newIndex == this.items.length) {
+        newIndex = 0;
+        this.round++;
+      }
+      this.items.forEach(pc => pc.isTurn = false)
+      this.startPcTurn(this.items[newIndex]);
+    }
+  }
+
+  startPcTurn(pc: PC) {
+    pc.isTurn = true;
+    pc.reaction = true;
+  }
+
   pcComparator(a: PC, b: PC): number {
-    if (!b.initiative) return 1;
-    if (!a.initiative) return -1;
+    if (!a.initiative && !b.initiative) return 0;
+    if (!b.initiative) return -1;
+    if (!a.initiative) return 1;
     return b.initiative - a.initiative;
   }
 
