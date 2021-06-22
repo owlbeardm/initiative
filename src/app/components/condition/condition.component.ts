@@ -19,11 +19,13 @@ export class ConditionComponent implements OnInit {
   ngOnInit() {
   }
 
-  changeCount(x:number){
-    if(!this.condition.count){
+  changeCount(x: number) {
+    if (!this.condition.count) {
       this.condition.count = 0;
     }
-    this.condition.count+=x;
+    this.condition.count += x;
+    if (this.condition.count < 0)
+      this.condition.count = 0;
   }
 
 }

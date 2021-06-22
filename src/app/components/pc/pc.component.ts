@@ -27,7 +27,7 @@ export class PCComponent implements OnInit {
     this.conditionForm = this.formBuilder.group({
       name: undefined,
       count: undefined,
-      descending: false
+      descending: true
     });
   }
 
@@ -49,6 +49,7 @@ export class PCComponent implements OnInit {
   }
 
   addCondition(value: Condition) {
+    console.log(value)
     this.pc.conditions.push(value);
     this.editCondition = false;
   }
