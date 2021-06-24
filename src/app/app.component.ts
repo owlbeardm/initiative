@@ -10,7 +10,9 @@ import { PC } from './components/pc/pc';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  items: PC[] = [];
+  items: PC[] = [{
+    name: 'PC 1', hp: 22, reaction: true, isTurn: false, initiative: 12, conditions: []
+  }];
   round = 0;
 
   clearAll() {
@@ -48,10 +50,12 @@ export class AppComponent {
   endPcTurn(pc: PC) {
     console.log("endPcTurn", pc);
     pc.conditions.forEach((condition) => {
-      if (condition.count && condition.descending != undefined) {
+      if (condition.count != undefined && condition.descending != undefined) {
         console.log("condition", condition);
-        if (condition.descending)
-          condition.count--;
+        if (condition.descending) {
+          if (condition.count > 0)
+            condition.count--;
+        }
         else
           condition.count++;
       }

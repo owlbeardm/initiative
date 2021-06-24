@@ -1,4 +1,4 @@
-<a href="#" class="btn btn-sm btn-round ml-auto" [ngClass]="condition.count == 0 ? '' : 'btn-primary'" (click)="showControls = !showControls">
+<a href="#" class="btn btn-sm btn-round ml-auto" [ngClass]="'btn-'+color" (click)="showControls = !showControls">
   {{condition.name}}
   <span class="badge badge-light" *ngIf="condition.count != undefined">{{condition.count}}
     <span class="fas fa-caret-down" *ngIf="condition.descending"></span>
