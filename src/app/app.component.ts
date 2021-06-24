@@ -10,9 +10,7 @@ import { PC } from './components/pc/pc';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  items: PC[] = [{
-    name: 'PC 1', hp: 22, reaction: true, isTurn: false, initiative: 12, conditions: []
-  }];
+  items: PC[] = [];
   round = 0;
 
   clearAll() {
